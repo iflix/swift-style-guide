@@ -58,6 +58,8 @@ The document uses the [raywenderlich.com Swift styleguide](https://github.com/ra
 
 Use descriptive names with camel case for classes, methods, variables, etc. Type names (classes, structures, enumerations and protocols) should be capitalized, while method names and variables should start with a lower case letter.
 
+Also see the ["Naming" section in the Swift 3 API guidelines](https://swift.org/documentation/api-design-guidelines/#naming).
+
 **Preferred:**
 
 ```swift
