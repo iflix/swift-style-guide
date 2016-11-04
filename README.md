@@ -52,11 +52,13 @@ The document uses the [raywenderlich.com Swift styleguide](https://github.com/ra
 
 ## Correctness
 
-Consider warnings to be errors. This rule informs many stylistic decisions such as not to use the `++` or `--` operators, C-style for loops, or strings as selectors.
+**Consider warnings to be errors**. This rule informs many stylistic decisions such as C-style for loops, or strings as selectors.
 
 ## Naming
 
 Use descriptive names with camel case for classes, methods, variables, etc. Type names (classes, structures, enumerations and protocols) should be capitalized, while method names and variables should start with a lower case letter.
+
+Also see the ["Naming" section in the Swift 3 API guidelines](https://swift.org/documentation/api-design-guidelines/#naming).
 
 **Preferred:**
 
@@ -135,7 +137,7 @@ enum Shape {
 
 ### Prose
 
-When referring to functions in prose (tutorials, books, comments) include the required parameter names from the caller's perspective or `_` for unnamed parameters. Examples:
+When referring to functions in prose (documentation, code comments, code reviews) include the required parameter names from the caller's perspective or `_` for unnamed parameters. Examples:
 
 > Call `convertPointAt(column:row:)` from your own `init` implementation.
 >
@@ -149,10 +151,9 @@ This is the same as the `#selector` syntax. When in doubt, look at how Xcode lis
 
 ![Methods in Xcode jump bar](screens/xcode-jump-bar.png)
 
-
 ### Class Prefixes
 
-Swift types are automatically namespaced by the module that contains them and you should not add a class prefix such as RW. If two names from different modules collide you can disambiguate by prefixing the type name with the module name. However, only specify the module name when there is possibility for confusion which should be rare.
+Swift types are automatically namespaced by the module that contains them and you should not add a class prefix such as `ABC`. If two names from different modules collide you can disambiguate by prefixing the type name with the module name. However, only specify the module name when there is possibility for confusion which should be rare.
 
 ```swift
 import SomeModule
@@ -166,7 +167,7 @@ Selectors are Obj-C methods that act as handlers for many Cocoa and Cocoa Touch 
 
 **Preferred:**
 ```swift
-let sel = #selector(viewDidLoad)
+let selector = #selector(viewDidLoad)
 ```
 
 **Not Preferred:**
@@ -244,9 +245,9 @@ For UIKit view controllers, consider grouping lifecycle, custom accessors, and I
 
 ### Unused Code
 
-Unused (dead) code, including Xcode template code and placeholder comments should be removed. An exception is when your tutorial or book instructs the user to use the commented code.
+Unused (dead) code, including Xcode template code and placeholder comments should be removed.
 
-Aspirational methods not directly associated with the tutorial whose implementation simply calls the super class should also be removed. This includes any empty/unused UIApplicationDelegate methods.
+Methods whose implementation simply calls the super class should also be removed. This includes any empty/unused `UIApplicationDelegate` methods.
 
 **Not Preferred:**
 ```swift
@@ -273,6 +274,9 @@ override func tableView(tableView: UITableView, numberOfRowsInSection section: I
   return Database.contacts.count
 }
 ```
+
+Also do not include Xcode generated comments header, that information can be taken out of git, and we don't have copyright concerns because the code is not opensoure.
+
 ### Minimal Imports
 
 Keep imports minimal. For example, don't import `UIKit` when importing `Foundation` will suffice.
@@ -282,11 +286,11 @@ Keep imports minimal. For example, don't import `UIKit` when importing `Foundati
 * Indent using 2 spaces rather than tabs to conserve space and help prevent line wrapping. Be sure to set this preference in Xcode and in the Project settings as shown below:
 
   ![Xcode indent settings](screens/indentation.png)
-  
+
   ![Xcode Project settings](screens/project_settings.png)
 
 * Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
-* Tip: You can re-indent by selecting some code (or ⌘A to select all) and then Control-I (or Editor\Structure\Re-Indent in the menu). Some of the Xcode template code will have 4-space tabs hard coded, so this is a good way to fix that.
+* Except for simple one liner checks like `guard let strongSelf = self else { return }`.
 
 **Preferred:**
 ```swift
@@ -308,7 +312,7 @@ else {
 }
 ```
 
-* There should be exactly one blank line between methods to aid in visual clarity and organization. Whitespace within methods should separate functionality, but having too many sections in a method often means you should refactor into several methods.
+* There should be **exactly one** blank line between methods to aid in visual clarity and organization. Whitespace within methods should separate functionality, but having too many sections in a method often means you should refactor into several methods.
 
 * Colons always have no space on the left and one space on the right. Exceptions are the ternary operator `? :` and empty dictionary `[:]`.
 
@@ -332,7 +336,6 @@ When they are needed, use comments to explain **why** a particular piece of code
 
 Avoid block comments inline with code, as the code should be as self-documenting as possible. *Exception: This does not apply to those comments used to generate documentation.*
 
-
 ## Classes and Structures
 
 ### Which one to use?
@@ -341,7 +344,7 @@ Remember, structs have [value semantics](https://developer.apple.com/library/mac
 
 Classes have [reference semantics](https://developer.apple.com/library/mac/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html#//apple_ref/doc/uid/TP40014097-CH13-XID_145). Use classes for things that do have an identity or a specific life cycle. You would model a person as a class because two person objects are two different things. Just because two people have the same name and birthdate, doesn't mean they are the same person. But the person's birthdate would be a struct because a date of 3 March 1950 is the same as any other date object for 3 March 1950. The date itself doesn't have an identity.
 
-Sometimes, things should be structs but need to conform to `AnyObject` or are historically modeled as classes already (`NSDate`, `NSSet`). Try to follow these guidelines as closely as possible.
+Sometimes, things should be structs but need to conform to `AnyObject` or are historically modeled as classes already (`Date`, `Set`). Try to follow these guidelines as closely as possible.
 
 ### Example definition
 
@@ -391,7 +394,6 @@ The example above demonstrates the following style guidelines:
  + Indent getter and setter definitions and property observers.
  + Don't add modifiers such as `internal` when they're already the default. Similarly, don't repeat the access modifier when overriding a method.
 
-
 ### Use of Self
 
 For conciseness, avoid using `self` since Swift does not require it to access an object's properties or invoke its methods.
@@ -405,7 +407,7 @@ class BoardLocation {
   init(row: Int, column: Int) {
     self.row = row
     self.column = column
-    
+
     let closure = {
       print(self.row)
     }
@@ -440,7 +442,7 @@ Mark classes `final` when inheritance is not intended. Example:
 ```swift
 // Turn any generic type into a reference type using this Box class.
 final class Box<T> {
-  let value: T 
+  let value: T
   init(_ value: T) {
     self.value = value
   }
@@ -457,20 +459,25 @@ func reticulateSplines(spline: [Double]) -> Bool {
 }
 ```
 
-For functions with long signatures, add line breaks at appropriate points and add an extra indent on subsequent lines:
+If a function has declaration longer than the recommended line length (_this value is still TBD_) then put each parameter on a new line:
 
-```swift
-func reticulateSplines(spline: [Double], adjustmentFactor: Double,
-    translateConstant: Int, comment: String) -> Bool {
-  // reticulate code goes here
-}
+ ```swift
+func reticulateSplines(
+    spline: [Double],
+    adjustmentFactor: Double,
+    translateConstant: Int,
+    comment: String
+  ) -> Bool {
 ```
+
+The rationale behind this convention is called [zero one inifinity rule](https://en.wikipedia.org/wiki/Zero_one_infinity_rule).
 
 ## Closure Expressions
 
 Use trailing closure syntax only if there's a single closure expression parameter at the end of the argument list. Give the closure parameters descriptive names.
 
 **Preferred:**
+
 ```swift
 UIView.animateWithDuration(1.0) {
   self.myView.alpha = 0
@@ -487,6 +494,7 @@ UIView.animateWithDuration(1.0,
 ```
 
 **Not Preferred:**
+
 ```swift
 UIView.animateWithDuration(1.0, animations: {
   self.myView.alpha = 0
@@ -526,16 +534,16 @@ Always use Swift's native types when available. Swift offers bridging to Objecti
 **Preferred:**
 ```swift
 let width = 120.0                                    // Double
-let widthString = (width as NSNumber).stringValue    // String
+let widthString = (width as Number).stringValue    // String
 ```
 
 **Not Preferred:**
 ```swift
-let width: NSNumber = 120.0                          // NSNumber
-let widthString: NSString = width.stringValue        // NSString
+let width: Number = 120.0                          // Number
+let widthString: String = width.stringValue        // String
 ```
 
-In Sprite Kit code, use `CGFloat` if it makes the code more succinct by avoiding too many conversions.
+In Sprite Kit, Core Animation, Core Graphics code, use `CGFloat` if it makes the code more succinct by avoiding too many conversions.
 
 ### Constants
 
@@ -555,6 +563,7 @@ enum Math {
 radius * Math.pi * 2 // circumference
 
 ```
+
 **Note:** The advantage of using a case-less enumeration is that it can't accidentally be instantiated and works as a pure namespace.
 
 **Not Preferred:**
@@ -573,7 +582,9 @@ Static methods and type properties work similarly to global functions and global
 
 Declare variables and function return types as optional with `?` where a nil value is acceptable.
 
-Use implicitly unwrapped types declared with `!` only for instance variables that you know will be initialized later before use, such as subviews that will be set up in `viewDidLoad`.
+Use implicitly unwrapped types declared with `!` **only** for `IBOutlet` view properties.
+
+**Never** force unwrap, ever.
 
 When accessing an optional value, use optional chaining if the value is only accessed once or if there are many optionals in the chain:
 
