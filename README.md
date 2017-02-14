@@ -784,21 +784,28 @@ resource.request().onComplete { [weak self] response in
 
 ## Access Control
 
-Full access control annotation in tutorials can distract from the main topic and is not required. Using `private` appropriately, however, adds clarity and promotes encapsulation. Use `private` as the leading property specifier. The only things that should come before access control are the `static` specifier or attributes such as `@IBAction` and `@IBOutlet`.
+Always use the strictest access control possible.
+
+![Access Control Priority Visualization](./screens/swift-access-control.jpeg)
+
+This rule applies to `private` vs `fileprivate` as well. When choosing between the two, always use `private`, unless the code wouldn't compile otherwise, which should only happen when the intended behaviour is "non visible to the outside world, but visible in extensions or other types defined in the same file".
+
+Use `private` as the leading property specifier. The only things that should come before access control are the `static` specifier or attributes such as `@IBAction` and `@IBOutlet`.
 
 **Preferred:**
 ```swift
-class TimeMachine {  
+class TimeMachine {
   private dynamic lazy var fluxCapacitor = FluxCapacitor()
 }
 ```
 
 **Not Preferred:**
 ```swift
-class TimeMachine {  
+class TimeMachine {
   lazy dynamic private var fluxCapacitor = FluxCapacitor()
 }
 ```
+
 
 ## Control Flow
 
