@@ -461,13 +461,13 @@ func reticulateSplines(spline: [Double]) -> Bool {
 
 If a function has declaration longer than the recommended line length (_this value is still TBD_) then put each parameter on a new line:
 
- ```swift
+```swift
 func reticulateSplines(
     spline: [Double],
     adjustmentFactor: Double,
     translateConstant: Int,
     comment: String
-  ) -> Bool {
+) -> Bool {
 ```
 
 The rationale behind this convention is called [zero one inifinity rule](https://en.wikipedia.org/wiki/Zero_one_infinity_rule).
