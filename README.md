@@ -13,6 +13,7 @@ The document uses the [raywenderlich.com Swift styleguide](https://github.com/ra
   * [Prose](#prose)
   * [Selectors](#selectors)
   * [Generics](#generics)
+  * [Extensions](#extensions)
   * [Class Prefixes](#class-prefixes)
   * [Language](#language)
 * [Code Organization](#code-organization)
@@ -193,6 +194,28 @@ func writeTo<target: OutputStream>(inout t: target)
 func max<Thing: Comparable>(x: Thing, _ y: Thing) -> Thing
 ```
 
+### Extensions
+
+When moving extensions in a dedicated file name it `ExtendedType+NewFunctionality.swift`.
+
+**Preferred:**
+
+```swift
+// String+Awesome.swift
+extension String {
+  func makeAwesome() -> String { return "AWESOME" }
+}
+```
+
+**Not Preferred:**
+
+```swift
+// AwesomeString.swift
+extension String {
+  func makeAwesome() -> String { return "AWESOME" }
+}
+```
+
 ### Language
 
 Use US English spelling to match Apple's API.
@@ -209,7 +232,7 @@ let colour = "red"
 
 ## Code Organization
 
-Use extensions to organize your code into logical blocks of functionality. Each extension should be set off with a `// MARK: -` comment to keep things well-organized.
+Use extensions to organize your code into logical blocks of functionality. Each extension not in a dedicated file should be set off with a `// MARK: -` comment to keep things well-organized. Refer to the extensions [naming guide](#extensions) to know how to name files containing a single extension.
 
 ### Protocol Conformance
 
