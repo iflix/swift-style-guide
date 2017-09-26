@@ -460,11 +460,11 @@ var diameter: Double {
 
 ### Final
 
-Mark classes `final` when inheritance is not intended. Example:
+Mark classes `final` only when inheritance should specifically not be allowed. When marking a class as `final`, you should also document why it was finalized. Example:
 
 ```swift
-// Turn any generic type into a reference type using this Box class.
-final class Box<T> {
+/// This class is marked as final because it's super unsafe to subclass it due to...
+final class SuperUnsafeBox<T> {
   let value: T
   init(_ value: T) {
     self.value = value
