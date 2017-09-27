@@ -460,7 +460,9 @@ var diameter: Double {
 
 ### Final
 
-Mark classes `final` only when inheritance should specifically not be allowed. When marking a class as `final`, you should also document why it was finalized. Example:
+Mark classes `final` only when inheritance should specifically not be allowed. In previous versions of Xcode, the standard compiler release mode did not perform Whole Module Optimization, and the `final` keyword [added performance optimiziations](https://developer.apple.com/swift/blog/?id=27) by avoiding dynamic dispatch. Whole Module Optimization is now the default in Xcode, meaning the compiler automatically infers `final` for all `internal`, `fileprivate` and `private` classes. This means we can remove this boilerplate, and focus using this keyword on the cases where subclassing should be deliberately disabled.
+
+When marking a class as `final`, you should also document why it was finalized. Example:
 
 ```swift
 /// This class is marked as final because it's super unsafe to subclass it due to...
