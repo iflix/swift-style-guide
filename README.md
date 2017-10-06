@@ -830,7 +830,51 @@ class TimeMachine {
 
 ## Control Flow
 
-Prefer the `for-in` style of `for` loop over the `while-condition-increment` style.
+### Avoid `!` in for negation
+
+When writing negative conditions, avoid using `!` because it's easy to miss it.
+
+**Preferred:**
+
+```swift
+if foo == false {
+  // do something
+}
+```
+
+**Not Preferred:**
+
+```swift
+if !foo {
+  // do something
+}
+```
+
+### Avoid negative conditions in `if-else`s
+
+Code using conditionals should be as straightforward to read as possible, avoiding negative conditions makes it easier to read.
+
+**Preferred:**
+
+```swift
+if hungry {
+  eat()
+} else {
+  sleep()
+}
+```
+
+**Not Preferred:**
+
+```swift
+if hungry == false {
+  sleep()
+} else {
+  eat()
+}
+```
+
+### Prefer the `for-in` style of `for` loop over the `while-condition-increment` style.
 
 **Preferred:**
 ```swift
