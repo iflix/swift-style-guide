@@ -16,6 +16,7 @@ The document uses the [raywenderlich.com Swift styleguide](https://github.com/ra
   * [Extensions](#extensions)
   * [Class Prefixes](#class-prefixes)
   * [Language](#language)
+  * [Abbreviations and Initialisms](#abbreviations-and-initialisms)
 * [Code Organization](#code-organization)
   * [Protocol Conformance](#protocol-conformance)
   * [Unused Code](#unused-code)
@@ -224,6 +225,24 @@ let color = "red"
 **Not Preferred:**
 ```swift
 let colour = "red"
+```
+
+### Abbreviations and Initialisms
+
+When using abbreviations and initialisms, conform to the [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/#general-conventions) and Apple's API when naming variables and types.
+
+**Preferred:**
+```swift
+var isRepresentableAsASCII = true
+var radarDetector: RadarScanner
+var uniqueID: UUID
+```
+
+**Not Preferred:**
+```swift
+var isRepresentableAsAscii = true
+var radarDetector: RADARScanner
+var uniqueId: UUID
 ```
 
 ## Code Organization
