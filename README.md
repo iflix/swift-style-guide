@@ -624,9 +624,16 @@ Declare variables and function return types as optional with `?` where a nil val
 
 Use implicitly unwrapped types declared with `!` **only** for `IBOutlet` view properties.
 
-**Never** force unwrap, ever.
+In most cases **don't** force unwrap.
+The only exception is when the occurence of a `nil` value would be due to a developer error. For example if we create a URL from a static string, the initializer is failable, but it would only result in a `nil` value if there was a typo in the string.
+Therefore it's ok to force-unwrap the result in this case and crash immediately if we've made a mistake:
 
-When accessing an optional value, use optional chaining if the value is only accessed once or if there are many optionals in the chain:
+```swift
+let url: URL = URL(string: "https://www.iflix.com")!
+```
+In theses cases, you can read the `!` character as an assertion. For more context, read [this article](https://www.objc.io/blog/2018/03/27/unwrapping-optionals/)
+
+In all other cases, when accessing an optional value, use optional chaining if the value is only accessed once or if there are many optionals in the chain:
 
 ```swift
 self.textContainer?.textLabel?.setNeedsDisplay()
