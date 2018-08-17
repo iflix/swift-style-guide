@@ -133,6 +133,67 @@ enum Shape {
 }
 ```
 
+## Switch Statements
+1. Enum cases with an associated value should have a appropriate label as opposed to just types
+
+***Preferred:***
+
+```swift
+enum Trade {
+    case buy(stock: String, amount: Int)
+    case sell(stock: String, amount: Int)
+}
+```
+
+***Not Preferred:***
+
+```swift
+enum Trade {
+    case buy(String, Int)
+    case sell(String, Int)
+}
+```
+
+
+2. When using a switch statement that has a finite set of possibilities, do not include a _default_ case. Instead, place unused cases at the bottom and use the break keyword to prevent execution.
+
+```swift
+enum UserState {
+    case loggedIn
+    case loggedOut
+    case openCatalogue
+    case onboarding
+}
+```
+
+***Preferred:***
+
+```swift
+func handleUser(with state: UserState) {
+    switch state:
+    case .loggedIn:
+        showMainUI()
+    case .onboarding:    
+        showOnboardingFlow()
+    case .openCatalogue, .loggedOut:
+        showVisitorUI()
+}
+```
+
+***Not preferred:***
+
+```swift
+func handleUser(with state: UserState) {
+    switch state:
+    case .loggedIn:
+        showMainUI()
+    case .onboarding:    
+        showOnboardingFlow()
+    case default:
+        showVisitorUI()
+}
+```
+
 ### Prose
 
 When referring to functions in prose (documentation, code comments, code reviews) include the required parameter names from the caller's perspective or `_` for unnamed parameters. Examples:
