@@ -511,6 +511,7 @@ func reticulateSplines(
 ```
 
 Be sure to set this preference in Xcode and in the Project settings as shown below:
+
 ![Xcode page guide settings](screens/page_guide_settings.png)
 
 The rationale behind this convention is called [zero one inifinity rule](https://en.wikipedia.org/wiki/Zero_one_infinity_rule).
