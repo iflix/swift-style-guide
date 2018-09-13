@@ -98,7 +98,7 @@ For functions and init methods, prefer named parameters for all arguments unless
 
 ```swift
 func dateFromString(dateString: String) -> NSDate
-func convertPointAt(column column: Int, row: Int) -> CGPoint
+func convertPointAt(column: Int, row: Int) -> CGPoint
 func timedAction(afterDelay delay: NSTimeInterval, perform action: SKAction) -> SKAction!
 
 // would be called like this:
@@ -321,7 +321,7 @@ Keep imports minimal. For example, don't import `UIKit` when importing `Foundati
 
 ## Spacing
 
-* Indent using 2 spaces rather than tabs to conserve space and help prevent line wrapping. Be sure to set this preference in Xcode and in the Project settings as shown below:
+* Indent using 4 spaces rather than tabs to conserve space and help prevent line wrapping. Be sure to set this preference in Xcode and in the Project settings as shown below:
 
   ![Xcode indent settings](screens/indentation.png)
 
@@ -499,7 +499,7 @@ func reticulateSplines(spline: [Double]) -> Bool {
 }
 ```
 
-If a function has declaration longer than the recommended line length (_this value is still TBD_) then put each parameter on a new line:
+If a function has declaration longer than the recommended line length (100) then put each parameter on a new line:
 
 ```swift
 func reticulateSplines(
@@ -509,6 +509,10 @@ func reticulateSplines(
     comment: String
 ) -> Bool {
 ```
+
+Be sure to set this preference in Xcode and in the Project settings as shown below:
+
+![Xcode page guide settings](screens/page_guide_settings.png)
 
 The rationale behind this convention is called [zero one inifinity rule](https://en.wikipedia.org/wiki/Zero_one_infinity_rule).
 
