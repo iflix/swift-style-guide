@@ -313,7 +313,7 @@ override func tableView(tableView: UITableView, numberOfRowsInSection section: I
 }
 ```
 
-Also do not include Xcode generated comments header, that information can be taken out of git, and we don't have copyright concerns because the code is not opensoure.
+Also do not include Xcode generated comments header, that information can be taken out of git, and we don't have copyright concerns because the code is not open source.
 
 ### Minimal Imports
 
