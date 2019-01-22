@@ -1053,7 +1053,7 @@ if (name == "Hello") {
 
 Don't use `self`, unless your code can't compile without it.
 
-Use `self` only when required by the compiler (in @escaping closures, or in initializers to disambiguate properties from arguments).
+Use `self` only when required by the compiler (in `@escaping` closures, or in initializers to disambiguate properties from arguments).
 
 ## Further Readings
 
