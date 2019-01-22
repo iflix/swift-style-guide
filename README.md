@@ -47,6 +47,7 @@ The document uses the [raywenderlich.com Swift styleguide](https://github.com/ra
   * [Failing Guards](#failing-guards)
 * [Semicolons](#semicolons)
 * [Parentheses](#parentheses)
+* [Use of self](#use-of-self)
 
 ## Correctness
 
@@ -1047,6 +1048,12 @@ if (name == "Hello") {
   print("World")
 }
 ```
+
+## Use of self
+
+Don't use `self`, unless your code can't compile without it.
+
+Use `self` only when required by the compiler (in @escaping closures, or in initializers to disambiguate properties from arguments).
 
 ## Further Readings
 
