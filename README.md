@@ -47,7 +47,7 @@ The document uses the [raywenderlich.com Swift styleguide](https://github.com/ra
   * [Failing Guards](#failing-guards)
 * [Semicolons](#semicolons)
 * [Parentheses](#parentheses)
-* [Use of self](#use-of-self)
+* [Use of `self`](#use-of-self)
 
 ## Correctness
 
