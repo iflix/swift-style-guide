@@ -1049,7 +1049,7 @@ if (name == "Hello") {
 }
 ```
 
-## Use of self
+## Use of `self`
 
 Don't use `self`, unless your code can't compile without it.
 
