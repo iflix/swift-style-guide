@@ -48,6 +48,7 @@ The document uses the [raywenderlich.com Swift styleguide](https://github.com/ra
 * [Semicolons](#semicolons)
 * [Parentheses](#parentheses)
 * [Use of `self`](#use-of-self)
+* [Images](#images)
 
 ## Correctness
 
@@ -1054,6 +1055,13 @@ if (name == "Hello") {
 Don't use `self`, unless your code can't compile without it.
 
 Use `self` only when required by the compiler (in `@escaping` closures, or in initializers to disambiguate properties from arguments).
+
+## Images
+
+Don't use `#imageLiteral(resourceName:)`.
+It might be nice to see the image in the code (_when it works_),
+but it hides the name of the image file making it harder to read the code.
+Use `UIImage(named:)` instead.
 
 ## Further Readings
 
