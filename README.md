@@ -636,7 +636,11 @@ Therefore it's ok to force-unwrap the result in this case and crash immediately 
 ```swift
 let url: URL = URL(string: "https://www.iflix.com")!
 ```
-In theses cases, you can read the `!` character as an assertion. For more context, read [this article](https://www.objc.io/blog/2018/03/27/unwrapping-optionals/)
+In such cases, you can read the `!` character as an assertion. For more context, read [this article](https://www.objc.io/blog/2018/03/27/unwrapping-optionals/)
+
+Another example is when the compiler throws a warning regarding the coercion of `IBOutlet`s in `LayoutConstraint`s.
+In this case force unwrap is accepted too.
+See https://github.com/iflix/apple-ios/issues/4911.
 
 In all other cases, when accessing an optional value, use optional chaining if the value is only accessed once or if there are many optionals in the chain:
 
